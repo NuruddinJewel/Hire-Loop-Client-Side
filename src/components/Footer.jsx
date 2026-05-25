@@ -50,7 +50,7 @@ const Footer = () => {
                     <div className="md:col-span-5 space-y-4">
                         <div className="flex items-center gap-3">
                             <div className="w-8 h-8 bg-gradient-to-tr from-purple-600 to-pink-500 rounded-lg flex items-center justify-center font-bold text-sm text-white shadow-md">
-                                P
+                                H
                             </div>
                             <div className="font-bold text-sm leading-tight tracking-wide">
                                 <span>Hire</span>
