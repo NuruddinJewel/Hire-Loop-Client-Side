@@ -100,7 +100,7 @@ export default function SignUpPage() {
                                     Welcome aboard, <span className="text-white font-medium">{form.name}</span>. Your account is ready.
                                 </p>
                             </div>
-                            <Link href="/sign-in" className="w-full mt-2">
+                            <Link href="signin" className="w-full mt-2">
                                 <Button className="w-full bg-white text-black font-semibold rounded-xl hover:bg-neutral-100 transition-colors">
                                     Go to Sign In
                                 </Button>
@@ -113,7 +113,7 @@ export default function SignUpPage() {
                                 <h1 className="text-2xl font-bold text-white mb-1">Create an account</h1>
                                 <p className="text-sm text-neutral-400">
                                     Already have one?{" "}
-                                    <Link href="/sign-in" className="text-purple-400 hover:text-purple-300 transition-colors font-medium">
+                                    <Link href="signin" className="text-purple-400 hover:text-purple-300 transition-colors font-medium">
                                         Sign in
                                     </Link>
                                 </p>
