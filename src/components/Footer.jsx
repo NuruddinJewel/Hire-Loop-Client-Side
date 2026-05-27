@@ -1,8 +1,6 @@
 "use client";
-
 import React from 'react';
 import { Link } from "@heroui/react";
-// Importing reliable brand icons from react-icons
 import { FaFacebookF, FaPinterestP, FaLinkedinIn } from "react-icons/fa6";
 
 const Footer = () => {
