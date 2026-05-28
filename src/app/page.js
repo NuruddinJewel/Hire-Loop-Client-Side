@@ -1,4 +1,5 @@
 import Banner from "@/components/Banner";
+import Pricing from "@/components/Pricing";
 import Roles from "@/components/Roles";
 import Stats from "@/components/Stats";
 import Image from "next/image";
@@ -10,6 +11,7 @@ export default function Home() {
       <Banner />
       <Stats />
       <Roles />
+      <Pricing />
     </div>
   );
 }
