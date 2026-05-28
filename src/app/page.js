@@ -1,3 +1,4 @@
+import Account from "@/components/Account";
 import Banner from "@/components/Banner";
 import Pricing from "@/components/Pricing";
 import Roles from "@/components/Roles";
@@ -12,6 +13,7 @@ export default function Home() {
       <Stats />
       <Roles />
       <Pricing />
+      <Account />
     </div>
   );
 }
