@@ -1,12 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { Input, Button } from "@heroui/react";
-import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiArrowLeft, FiCheckCircle } from "react-icons/fi";
+import { Button } from "@heroui/react";
+import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiArrowLeft, FiCheckCircle, FiBriefcase, FiSearch } from "react-icons/fi";
 import { authClient } from "@/lib/auth-client";
 
 export default function SignUpPage() {
     const [form, setForm] = useState({ name: "", email: "", password: "" });
+    const [role, setRole] = useState("seeker");
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
@@ -42,6 +43,7 @@ export default function SignUpPage() {
                 name: form.name,
                 email: form.email,
                 password: form.password,
+                role: role,
             });
 
             if (authError) {
@@ -56,6 +58,21 @@ export default function SignUpPage() {
         }
     };
 
+    const roles = [
+        {
+            value: "seeker",
+            label: "Job Seeker",
+            description: "Find your dream job",
+            icon: <FiSearch className="h-4 w-4" />,
+        },
+        {
+            value: "recruiter",
+            label: "Recruiter",
+            description: "Post jobs & hire talent",
+            icon: <FiBriefcase className="h-4 w-4" />,
+        },
+    ];
+
     return (
         <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4 relative overflow-hidden">
 
@@ -67,7 +84,7 @@ export default function SignUpPage() {
 
                 {/* Back to Sign In */}
                 <Link
-                    href="/sign-in"
+                    href="/auth/signin"
                     className="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors mb-8 group"
                 >
                     <FiArrowLeft className="h-4 w-4 group-hover:-translate-x-0.5 transition-transform" />
@@ -97,10 +114,11 @@ export default function SignUpPage() {
                             <div>
                                 <h2 className="text-xl font-semibold text-white mb-1">Account Created!</h2>
                                 <p className="text-sm text-neutral-400">
-                                    Welcome aboard, <span className="text-white font-medium">{form.name}</span>. Your account is ready.
+                                    Welcome aboard,{" "}
+                                    <span className="text-white font-medium">{form.name}</span>. Your account is ready.
                                 </p>
                             </div>
-                            <Link href="signin" className="w-full mt-2">
+                            <Link href="/auth/signin" className="w-full mt-2">
                                 <Button className="w-full bg-white text-black font-semibold rounded-xl hover:bg-neutral-100 transition-colors">
                                     Go to Sign In
                                 </Button>
@@ -113,7 +131,7 @@ export default function SignUpPage() {
                                 <h1 className="text-2xl font-bold text-white mb-1">Create an account</h1>
                                 <p className="text-sm text-neutral-400">
                                     Already have one?{" "}
-                                    <Link href="signin" className="text-purple-400 hover:text-purple-300 transition-colors font-medium">
+                                    <Link href="/auth/signin" className="text-purple-400 hover:text-purple-300 transition-colors font-medium">
                                         Sign in
                                     </Link>
                                 </p>
@@ -194,6 +212,39 @@ export default function SignUpPage() {
                                     )}
                                 </div>
 
+                                {/* Role Selection — custom card-style radio */}
+                                <div className="flex flex-col gap-2">
+                                    <label className="text-xs font-medium text-neutral-400 tracking-wide">I am a</label>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        {roles.map((r) => (
+                                            <button
+                                                key={r.value}
+                                                type="button"
+                                                onClick={() => setRole(r.value)}
+                                                className={`flex items-start gap-3 p-3.5 rounded-xl border text-left transition-all duration-200
+                                                    ${role === r.value
+                                                        ? "border-purple-500/60 bg-purple-500/10 text-white"
+                                                        : "border-neutral-800 bg-neutral-900/50 text-neutral-400 hover:border-neutral-700 hover:text-neutral-300"
+                                                    }`}
+                                            >
+                                                {/* Icon */}
+                                                <span className={`mt-0.5 flex-shrink-0 ${role === r.value ? "text-purple-400" : "text-neutral-500"}`}>
+                                                    {r.icon}
+                                                </span>
+                                                {/* Text */}
+                                                <span className="flex flex-col gap-0.5">
+                                                    <span className="text-sm font-medium leading-tight">{r.label}</span>
+                                                    <span className="text-xs text-neutral-500 leading-tight">{r.description}</span>
+                                                </span>
+                                                {/* Selected dot */}
+                                                {role === r.value && (
+                                                    <span className="ml-auto mt-0.5 w-2 h-2 rounded-full bg-purple-400 flex-shrink-0" />
+                                                )}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
                                 {/* Submit */}
                                 <Button
                                     type="submit"
@@ -205,7 +256,7 @@ export default function SignUpPage() {
                             </form>
 
                             {/* Terms */}
-                            <p className="text-xs text-neutral-600 text-center mt-5 leading-relaxed">
+                            {/* <p className="text-xs text-neutral-600 text-center mt-5 leading-relaxed">
                                 By signing up, you agree to our{" "}
                                 <Link href="/terms" className="text-neutral-500 hover:text-neutral-300 underline underline-offset-2 transition-colors">
                                     Terms of Service
@@ -215,7 +266,7 @@ export default function SignUpPage() {
                                     Privacy Policy
                                 </Link>
                                 .
-                            </p>
+                            </p> */}
                         </>
                     )}
                 </div>
